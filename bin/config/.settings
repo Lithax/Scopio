@@ -25,5 +25,5 @@ Security${
 }
 
 Permission${
-
+    default:1;
 }

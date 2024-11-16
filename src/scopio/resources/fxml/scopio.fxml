@@ -76,8 +76,9 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Security">
           <items>
-            <MenuItem mnemonicParsing="false" text="Black/Whitelist" />
-                  <MenuItem mnemonicParsing="false" text="Encryption &amp; Security Options" />
+            <MenuItem mnemonicParsing="false" text="Permissions" />
+                  <MenuItem mnemonicParsing="false" text="Encryption Options" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Stop All Processes" />
           </items>
         </Menu>
@@ -90,7 +91,6 @@
             <Menu mnemonicParsing="false" text="Settings">
                <items>
                   <MenuItem mnemonicParsing="false" text="Limits &amp; Restraints" />
-                  <MenuItem mnemonicParsing="false" text="User permissions" />
                   <MenuItem mnemonicParsing="false" text="Advanced Settings..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Notifications" />
