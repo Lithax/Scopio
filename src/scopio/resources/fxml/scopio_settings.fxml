@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" vvalue="1.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <VBox alignment="TOP_CENTER" prefHeight="384.0" prefWidth="597.0" spacing="10">
+            <children>
+                <Label prefHeight="12.0" prefWidth="186.0" text="Network Options">
+                    <font>
+                        <Font name="System Bold" size="23.0" />
+                    </font>
+                </Label>
+                <Separator prefWidth="200.0">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </Separator>
+                <Label text="Network Scan-method">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <HBox alignment="CENTER" prefWidth="600.0" spacing="35.0">
+                    <children>
+                        <RadioButton mnemonicParsing="false" onMouseClicked="#switchToTargeted" selected="true" text="Targeted">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="networkSet1" />
+                            </toggleGroup>
+                     <tooltip>
+                        <Tooltip text="Scans specific multicast groups without affecting the network." />
+                     </tooltip>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" onMouseClicked="#switchToInvasive" text="Invasive" toggleGroup="$networkSet1">
+                     <tooltip>
+                        <Tooltip text="Performs a thorough scan that may affect network performance." />
+                     </tooltip></RadioButton>
+                    </children>
+                </HBox>
+            <Label layoutX="229.0" layoutY="67.0" minHeight="-Infinity" prefHeight="39.0" prefWidth="159.0" text="Changes how the network is scanned for Devices." wrapText="true" />
+            <Pane prefHeight="28.0" prefWidth="1277.0" />
+            <Label layoutX="229.0" layoutY="67.0" prefHeight="17.0" prefWidth="131.0" text="Response Timeout">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="165.0" prefWidth="600.0" spacing="15.0">
+               <children>
+                  <Label text="1200ms">
+                     <font>
+                        <Font name="Calibri" size="19.0" />
+                     </font>
+                  </Label>
+                  <Slider fx:id="timeoutSlider1" blockIncrement="5.0" max="5000.0" min="20.0" snapToTicks="true" value="1200.0">
+                     <tooltip>
+                        <Tooltip text="Select timeout for device response, slow devices need longer timeouts." />
+                     </tooltip>
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
+                  </Slider>
+               </children>
+            </HBox>
+            <Label layoutX="229.0" layoutY="130.0" minHeight="-Infinity" prefHeight="85.0" prefWidth="163.0" text="Set how long is waited for a response from a destination, slow devices may not be able to respond with short timeouts." wrapText="true" />
+            <Pane layoutX="10.0" layoutY="179.0" prefHeight="28.0" prefWidth="1277.0" />
+            <Label layoutX="243.0" layoutY="130.0" prefHeight="25.0" prefWidth="147.0" text="Allocated buffer size">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="165.0" prefWidth="600.0" spacing="15.0">
+               <children>
+                  <TextField fx:id="buffersizeField" onInputMethodTextChanged="#setBufferSize" text="1024" />
+               </children>
+            </HBox>
+            <Label minHeight="-Infinity" prefHeight="123.0" prefWidth="161.0" text="This setting controls the amount of memory used for data transfer. A larger buffer can improve performance, especially for larger files, but may require more system memory." wrapText="true" />
+                <HBox alignment="BOTTOM_RIGHT" prefHeight="143.0" prefWidth="597.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Button cancelButton="true" mnemonicParsing="false" text="Cancel" />
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" text="Save Changes..." HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>
