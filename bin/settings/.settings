@@ -1,0 +1,29 @@
+Network${
+    invasivescanning:false;
+    targetedscanning:true;
+    autoscan:false;
+    timeout:1200;
+    buffer:1024;
+}
+
+Recent${
+    "C:\\";
+}
+
+Theme${
+    theme:true;
+}
+
+Notification${
+    update:true;
+    info:true;
+    alert:true;
+}
+
+Security${
+
+}
+
+Permission${
+
+}

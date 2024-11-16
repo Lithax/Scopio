@@ -5,8 +5,7 @@ import java.util.List;
 public class NetworkManager {
     private int timeout;
     
-
-    public NetworkManager(int timeout, ) {
+    public NetworkManager(int timeout) {
         
     }
 
@@ -14,12 +13,8 @@ public class NetworkManager {
 
     }
 
-    public Network getNetwork(NetworkInterface networkinterface) {
-        
-    }
-
-    private List<Device> searchNetwork() {
-
+    public Network searchNetwork(NetworkInterface networkinterface) {
+        networkinterface.   
     }
 
     public void setTimeout(int timeout) {

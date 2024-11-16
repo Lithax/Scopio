@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
@@ -84,10 +85,27 @@
             </Label>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="165.0" prefWidth="600.0" spacing="15.0">
                <children>
-                  <TextField fx:id="buffersizeField" onInputMethodTextChanged="#setBufferSize" text="1024" />
+                  <TextField fx:id="buffersizeField" onInputMethodTextChanged="#setBufferSize" promptText="bytes" text="1024" />
                </children>
             </HBox>
             <Label minHeight="-Infinity" prefHeight="123.0" prefWidth="161.0" text="This setting controls the amount of memory used for data transfer. A larger buffer can improve performance, especially for larger files, but may require more system memory." wrapText="true" />
+            <Label layoutX="249.0" layoutY="362.0" prefHeight="25.0" prefWidth="147.0" text="Auto-Scan Network">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="autoscanBut" mnemonicParsing="false" onMouseClicked="#toggleAutoScan" text="Enable Auto-Scan" />
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="397.0" prefWidth="600.0" spacing="5.0">
+               <children>
+                  <TextField fx:id="autoScanInterval" onInputMethodTextChanged="#setAutoScanInterval" prefHeight="25.0" prefWidth="97.0" promptText="seconds" text="300" />
+                  <Label prefHeight="20.0" prefWidth="51.0" text="seconds">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label layoutX="241.0" layoutY="433.0" minHeight="-Infinity" prefHeight="58.0" prefWidth="161.0" text="Choose if the networklist should automatically be refreshed in a certain interval." wrapText="true" />
                 <HBox alignment="BOTTOM_RIGHT" prefHeight="143.0" prefWidth="597.0" spacing="10.0" VBox.vgrow="ALWAYS">
                     <children>
                         <Button cancelButton="true" mnemonicParsing="false" text="Cancel" />
