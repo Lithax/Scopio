@@ -6,7 +6,7 @@ public class NetworkManager {
     private int timeout;
     
     public NetworkManager(int timeout) {
-        
+        this.timeout = timeout;
     }
 
     public List<Network> searchInterfaces() {
