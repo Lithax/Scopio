@@ -15,4 +15,13 @@ public enum LogLevel {
     public String getLog() {
         return log;
     }
+
+    public static LogLevel getLogLevelFromString(String logLevel) {
+        for (LogLevel log : LogLevel.values()) {
+            if(log.getLog().equals(logLevel)) {
+                return log;
+            }
+        }
+        return null;
+    }
 }

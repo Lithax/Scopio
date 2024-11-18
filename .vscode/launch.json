@@ -2,6 +2,22 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "scopio.Main",
+            "projectName": "Scopio_38da41c0",
+            "vmArgs": "--module-path C:\\Users\\mhbau\\Downloads\\openjfx-22.0.2_windows-x64_bin-sdk\\javafx-sdk-22.0.2\\lib --add-modules javafx.controls,javafx.fxml,javafx.media"
+        },
+        {
+            "type": "java",
+            "name": "Logger",
+            "request": "launch",
+            "mainClass": "scopio.log.Logger",
+            "projectName": "Scopio_38da41c0",
+            "cwd": "C:\\Users\\mhbau\\OneDrive\\Dokumente\\Java Projects\\Projects\\Scopio\\bin\\scopio\\log"
+        },
+        {
+            "type": "java",
             "name": "Notification",
             "request": "launch",
             "mainClass": "scopio.gui.Notification",
@@ -9,38 +25,11 @@
         },
         {
             "type": "java",
-            "name": "VideoPlayer",
-            "request": "launch",
-            "mainClass": "VideoPlayer",
-            "projectName": "Scopio_38da41c0"
-        },
-        {
-            "type": "java",
-            "name": "MultiThreadedTerminalWriter",
-            "request": "launch",
-            "mainClass": "MultiThreadedTerminalWriter",
-            "projectName": "Scopio_38da41c0"
-        },
-        {
-            "type": "java",
-            "name": "TerminalTroll",
-            "request": "launch",
-            "mainClass": "TerminalTroll",
-            "projectName": "Scopio_38da41c0"
-        },
-        {
-            "type": "java",
-            "name": "TerminalUpdateExample",
-            "request": "launch",
-            "mainClass": "TerminalUpdateExample",
-            "projectName": "Scopio_38da41c0"
-        },
-        {
-            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "Main",
-            "projectName": "Scopio_38da41c0"
+            "projectName": "Scopio_38da41c0",
+            "vmArgs": "--module-path C:\\Users\\mhbau\\Downloads\\openjfx-22.0.2_windows-x64_bin-sdk\\javafx-sdk-22.0.2\\lib --add-modules javafx.controls,javafx.fxml,javafx.media"
         }
     ]
 }
