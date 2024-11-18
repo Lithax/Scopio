@@ -12,7 +12,8 @@ public class Settings extends FileProcessor {
         String[] split = raw.split("[$]");
         for(String settingGroup : split) {
             String header = settingGroup.substring(0, settingGroup.indexOf('{'));
-            settings.put(header, new HashMap<>());
+            HashMap<String, String> group = new HashMap<>();
+            settings.put(header, group);
         }
     }
 }
