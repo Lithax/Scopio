@@ -14,8 +14,7 @@ public class Logger extends FileProcessor {
     }
 
     public void writeNewLogEntry(String content, LogLevel logLevel) {
-        System.out.println("["+LocalDateTime.now()+"]: "+content+" :"+logLevel.getLog()+"\n");
-        write("["+LocalDateTime.now()+"]: "+content+" :"+logLevel.getLog()+"\n");
+        appendWrite("["+LocalDateTime.now()+"]: "+content+" :"+logLevel.getLog()+"\n");
     }
 
     public void clearLog() {

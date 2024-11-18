@@ -6,7 +6,7 @@ public enum Request {
         @Override
         public void executeAction(Transmittor transmittor, String data) {
             try {
-                transmittor.getOut().write("Hello\n");
+                transmittor.getOut().write("!a\n");
                 transmittor.getOut().flush();
             } catch (IOException e) {
                 e.printStackTrace();

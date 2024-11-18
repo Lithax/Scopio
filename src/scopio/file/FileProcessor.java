@@ -38,6 +38,10 @@ public class FileProcessor {
         }
     }
 
+    protected void appendWrite(String content) {
+        write(read()+content);
+    }
+
     public File getFile() {
         return file;
     }

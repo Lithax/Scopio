@@ -1,5 +1,11 @@
 package scopio.file;
 
-public class Settings {
+import java.io.File;
+
+public class Settings extends FileProcessor {
+    public Settings() {
+        super(new File("../../config/.settings"));
+    }
+
     
 }
