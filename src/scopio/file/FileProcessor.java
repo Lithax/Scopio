@@ -21,6 +21,7 @@ public class FileProcessor {
             while((line = bufferedReader.readLine()) != null) {
                 raw+=line+"\n";
             }
+            raw = raw.substring(0, raw.length()-2);
             bufferedReader.close();
             return raw;
         } catch (Exception e) {

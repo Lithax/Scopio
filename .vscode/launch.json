@@ -2,6 +2,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Sanitizer",
+            "request": "launch",
+            "mainClass": "scopio.security.Sanitizer",
+            "projectName": "Scopio_38da41c0",
+            "cwd": "C:\\Users\\mhbau\\OneDrive\\Dokumente\\Java Projects\\Projects\\Scopio\\bin\\scopio\\security"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "scopio.Main",

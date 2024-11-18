@@ -24,7 +24,7 @@ public class Logger extends FileProcessor {
     public List<LogEntry> readLogEntries() {
         List<LogEntry> logEntries = new ArrayList<>();
         String raw = read();
-        String[] split = raw.split("\n");
+        String[] split = raw.split("[\n]");
         for(String logEntry : split) {
             LogLevel logLevel = LogLevel.getLogLevelFromString(logEntry.substring(logEntry.lastIndexOf(':')+1));
             String timestamp = logEntry.substring(1, logEntry.indexOf(']'));
