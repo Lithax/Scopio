@@ -1,4 +1,4 @@
-Network${
+$Network{
     invasivescanning:false;
     targetedscanning:true;
     autoscan:false;
@@ -6,27 +6,27 @@ Network${
     buffer:1024;
 }
 
-Recent${
+$Recent{
     [
         "C:\\",
         
     ]
 }
 
-Theme${
+$Theme{
     theme:true;
 }
 
-Notification${
+$Notification{
     update:true;
     info:true;
     alert:true;
 }
 
-Security${
+$Security{
     
 }
 
-Permission${
+$Permission{
     default:1;
 }
