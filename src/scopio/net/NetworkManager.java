@@ -10,7 +10,7 @@ public class NetworkManager {
     }
 
     public List<Network> searchInterfaces() {
-
+        
     }
 
     public Network searchNetwork(NetworkInterface networkinterface) {

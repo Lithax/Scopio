@@ -2,6 +2,28 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CryptoHandler",
+            "request": "launch",
+            "mainClass": "scopio.security.CryptoHandler",
+            "projectName": "Scopio_38da41c0"
+        },
+        {
+            "type": "java",
+            "name": "FileProcessor",
+            "request": "launch",
+            "mainClass": "scopio.file.FileProcessor",
+            "projectName": "Scopio_38da41c0",
+            "cwd": "C:\\Users\\mhbau\\OneDrive\\Dokumente\\Java Projects\\Projects\\Scopio\\bin\\scopio\\file"
+        },
+        {
+            "type": "java",
+            "name": "EncryptionHandler",
+            "request": "launch",
+            "mainClass": "scopio.security.EncryptionHandler",
+            "projectName": "Scopio_38da41c0"
+        },
+        {
+            "type": "java",
             "name": "Settings",
             "request": "launch",
             "mainClass": "scopio.file.Settings",

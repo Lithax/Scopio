@@ -11,7 +11,7 @@ public class Settings extends FileProcessor {
         readFromSettings();
     }
 
-    public void readFromSettings() {
+    private void readFromSettings() {
         String raw = read();
         String[] split = raw.split("[$]");
         for(String settingGroup : split) {

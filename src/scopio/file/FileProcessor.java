@@ -1,10 +1,8 @@
 package scopio.file;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class FileProcessor {
     private File file;
@@ -13,30 +11,35 @@ public class FileProcessor {
         this.file = file;
     }
 
-    protected String read() {
+    protected byte[] readb() {
         try {
-            String raw = "";
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            String line;
-            while((line = bufferedReader.readLine()) != null) {
-                raw+=line+"\n";
-            }
-            raw = raw.substring(0, raw.length()-2);
-            bufferedReader.close();
-            return raw;
+            byte[] buffer = new byte[(int)file.length()];
+            FileInputStream stream = new FileInputStream(file);
+            stream.read(buffer);
+            stream.close();
+            return buffer;
         } catch (Exception e) {
-            return "";
+            return null;
         }
     }
 
-    protected void write(String content) {
+    protected void writeb(byte[] bytes) {
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-            bufferedWriter.write(content);
-            bufferedWriter.close();
+            FileOutputStream stream = new FileOutputStream(file);
+            stream.write(bytes);
+            stream.flush();
+            stream.close();
         } catch (Exception e) {
-            //nothing
+            // nothing
         }
+    }
+
+    protected String read() {
+        return new String(readb());
+    }
+
+    protected void write(String content) {
+        writeb(content.getBytes());
     }
 
     protected void appendWrite(String content) {

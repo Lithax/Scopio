@@ -1,1 +1,1 @@
-Network{autoscan:false;targetedscanning:true;buffer:1024;invasivescanning:false;timeout:1200;}$Theme{theme:true;}$Security{defaultPermission:2;}$Notification{alert:true;update:true;info:true;}$
+Network{invasivescanning:false;targetedscanning:true;autoscan:false;timeout:1200;buffer:1024;}$Theme{theme:true;}$Notification{update:true;info:true;alert:true;}$Security{defaultPermission:1;AESkey:1024;RSAkey:2048;}$
