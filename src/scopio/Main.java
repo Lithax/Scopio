@@ -5,7 +5,7 @@ import scopio.gui.Alerts;
 
 /**
  *Main
- *@author not Your_identity
+ *@author !Your_identity
  */
 public class Main extends Application {
     @Override
