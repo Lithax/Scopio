@@ -19,7 +19,8 @@ public class Client extends Thread {
             try {
                 socket.getInputStream().read(buffer);
                 String str = new String(buffer);
-                Request.findRequest(str).executeAction(server, buffer, socket);
+                System.out.println(str.trim());
+                Request.findRequest(str.trim()).executeAction(server, buffer, socket);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -1,4 +1,5 @@
 package scopio.net;
+
 public enum DeviceType {
     PC(""),
     LAPTOP(""),

@@ -1,11 +1,13 @@
 package scopio.net;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
-import scopio.gui.Alerts;
 import scopio.log.LogLevel;
 import scopio.log.Logger;
 
@@ -22,7 +24,7 @@ class ClientHandler extends Thread {
 
     @Override
     public void run() {
-        
+       
     }
 
     public boolean join(String ip, int port) throws Exception {
@@ -36,21 +38,36 @@ class ClientHandler extends Thread {
     public boolean write(byte[] bytes) {
         try {
             out.write(bytes);
+            out.flush();
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
-    public byte[] read() {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        int bytesRead;
+    public byte[] writeAndRead(byte[] data) {
         try {
-            while ((bytesRead = in.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
-            }
-            return outputStream.toByteArray();
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            Future<byte[]> future = executor.submit(() -> {
+                write(data);
+                return read();
+            });
+            byte[] readData = future.get();
+            executor.shutdown();
+            return readData;
         } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public byte[] read() {
+        try {
+            int bytesRead = in.read(buffer);
+            if (bytesRead == -1) {
+                return null;
+            }
+            return Arrays.copyOf(buffer, bytesRead);
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
