@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import scopio.gui.Alerts;
+import scopio.log.*;
 
 class Transmittor {
     private Socket socket;
@@ -19,7 +20,7 @@ class Transmittor {
     public Transmittor(int type, int buffer) {
         if(type == SERVER) {
 
-        } else {
+        } else { //CLIENT
 
         }
         this.buffer = new byte[buffer];
@@ -83,5 +84,18 @@ class Transmittor {
 
     public BufferedWriter getOut() {
         return out;
+    }
+
+    public static void main(String[] args) {
+        try {
+            new Logger().writeNewLogEntry("Default Entry", LogLevel.INFO);
+            ServerHandler server = new ServerHandler(4096, "192.168.56.1", 0, 50);
+            server.start();
+            ClientHandler client = new ClientHandler(4096, "192.168.56.1", server.getPort());
+            client.write("!p".getBytes());
+            System.out.println(new String(client.read()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -6,17 +6,19 @@ import java.net.NetworkInterface;
 import java.util.List;
 
 public class Network {
+    private String interfacename;
     private String networkAdr;
     private String mask;
     private List<Device> devices;
     private NetworkInterface networkInterface;
     
-    public Network(List<Device> devices, NetworkInterface networkInterface) {
-        this.devices = devices;
+    public Network(NetworkInterface networkInterface, int timeout) {
         InterfaceAddress interfaceAddress = networkInterface.getInterfaceAddresses().get(0);
         this.mask = getSubnetMask(networkInterface);
         this.networkAdr = getNetworkAddress(interfaceAddress);
         this.networkInterface = networkInterface;
+        this.interfacename = networkInterface.getDisplayName();
+        this.devices = searchDevices(timeout);
     }
 
     public static String getSubnetMask(NetworkInterface ni) {
@@ -57,6 +59,20 @@ public class Network {
         };
     }
 
+    public List<Device> searchDevices(int timeout) {
+    	for (int i = 1; i < 255; i++) {
+            String host = networkAdr.substring(0, i) + "." + i;
+            try {
+                InetAddress address = InetAddress.getByName(host);
+                if (address.isReachable(timeout)) {
+                    System.out.println("Device reachable: " + host);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public NetworkInterface getNetworkInterface() {
         return networkInterface;
     }
@@ -71,5 +87,9 @@ public class Network {
     
     public String getMask() {
         return mask;
+    }
+
+    public String getInterfacename() {
+        return interfacename;
     }
 }

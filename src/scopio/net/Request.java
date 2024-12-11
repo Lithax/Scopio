@@ -1,14 +1,13 @@
 package scopio.net;
-import java.io.IOException;
+import java.net.Socket;
 
 public enum Request {
     PING("!p") {
         @Override
-        public void executeAction(Transmittor transmittor, String data) {
+        public void executeAction(ServerHandler server, byte[] data, Socket socket) {
             try {
-                transmittor.getOut().write("!a\n");
-                transmittor.getOut().flush();
-            } catch (IOException e) {
+                server.write("!a\n".getBytes(), socket);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -16,7 +15,7 @@ public enum Request {
 
     final String prefix;
 
-    public abstract void executeAction(Transmittor transmittor, String data);
+    public abstract void executeAction(ServerHandler server, byte[] data, Socket socket);
 
     Request(String prefix) {
         this.prefix = prefix;

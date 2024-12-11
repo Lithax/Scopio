@@ -2,6 +2,21 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Transmittor",
+            "request": "launch",
+            "mainClass": "scopio.net.Transmittor",
+            "projectName": "Scopio_38da41c0",
+            "cwd": "C:\\Users\\mhbau\\OneDrive\\Dokumente\\Java Projects\\Projects\\Scopio\\bin\\scopio\\net"
+        },
+        {
+            "type": "java",
+            "name": "NetworkManager",
+            "request": "launch",
+            "mainClass": "scopio.net.NetworkManager",
+            "projectName": "Scopio_38da41c0"
+        },
+        {
+            "type": "java",
             "name": "CryptoHandler",
             "request": "launch",
             "mainClass": "scopio.security.CryptoHandler",
