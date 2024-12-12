@@ -1,5 +1,9 @@
 package scopio.net;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.Socket;
+
+import scopio.security.CryptoHandler;
 
 public enum Request {
     PING("!ping") {
@@ -12,7 +16,7 @@ public enum Request {
             }
         }
     },
-    GET_PUBLIC_KEY("!pub") {
+    GET_PUBLIC_KEY("!kpub") {
         @Override
         public void executeAction(ServerHandler server, byte[] data, Socket socket) {
             try {
@@ -20,6 +24,14 @@ public enum Request {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    },
+    FILE_TRANSMIT("!file") {
+        @Override
+        public void executeAction(ServerHandler server, byte[] data, Socket socket) {
+            String full = new String(data);
+            String filename = full.substring(5, full.length());
+            
         }
     };
 
@@ -42,5 +54,21 @@ public enum Request {
             }
         }
         return null;
+    }
+
+    public static byte[] makeRequest(Request request, byte[] data) {
+        if(data != null) {
+            try {
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                outputStream.write(request.getPrefix().getBytes());
+                outputStream.write(data);
+                byte[] combined = outputStream.toByteArray();
+                return combined;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return request.getPrefix().getBytes();
     }
 }

@@ -3,6 +3,7 @@ package scopio.net;
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Network {
@@ -13,13 +14,19 @@ public class Network {
     private NetworkInterface networkInterface;
     
     public Network(NetworkInterface networkInterface, int timeout) {
-        InterfaceAddress interfaceAddress = networkInterface.getInterfaceAddresses().get(0);
-        this.mask = getSubnetMask(networkInterface);
-        this.networkAdr = getNetworkAddress(interfaceAddress);
+        if (networkInterface.getInterfaceAddresses().isEmpty()) {
+            this.mask = "0.0.0.0";
+            this.networkAdr = "0.0.0.0";
+        } else {
+            InterfaceAddress interfaceAddress = networkInterface.getInterfaceAddresses().get(0);
+            this.mask = getSubnetMask(networkInterface);
+            this.networkAdr = getNetworkAddress(interfaceAddress);
+        }
         this.networkInterface = networkInterface;
         this.interfacename = networkInterface.getDisplayName();
         this.devices = searchDevices(timeout);
     }
+    
 
     public static String getSubnetMask(NetworkInterface ni) {
         for (InterfaceAddress ia : ni.getInterfaceAddresses()) {
@@ -60,18 +67,30 @@ public class Network {
     }
 
     public List<Device> searchDevices(int timeout) {
-    	for (int i = 1; i < 255; i++) {
-            String host = networkAdr.substring(0, i) + "." + i;
-            try {
-                InetAddress address = InetAddress.getByName(host);
-                if (address.isReachable(timeout)) {
-                    System.out.println("Device reachable: " + host);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+        List<Device> devices = new ArrayList<>();
+        try {
+            String[] parts = networkAdr.split("\\.");
+            if (parts.length != 4) {
+                return devices;
             }
+            String base = String.join(".", parts[0], parts[1], parts[2]);
+            for (int i = 1; i < 255; i++) {
+                String host = base + "." + i;
+                try {
+                    InetAddress address = InetAddress.getByName(host);
+                    if (address.isReachable(timeout)) {
+                        devices.add(new Device(host, address.getHostName(), DeviceType.UNKNOWN));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return devices;
     }
+    
 
     public NetworkInterface getNetworkInterface() {
         return networkInterface;

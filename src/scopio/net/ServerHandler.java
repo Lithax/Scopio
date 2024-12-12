@@ -21,10 +21,10 @@ class ServerHandler extends Thread {
     private PublicKey pub;
     private PrivateKey priv;
 
-    public ServerHandler(int buffer, String ip, int port, int maxConnections) throws Exception {
+    public ServerHandler(int buffer, String ip, int port, int maxConnections, int rsa_keysize) throws Exception {
         this.buffer = new byte[buffer];
         join(ip, port, maxConnections);
-        KeyPair pair = CryptoHandler.generateAsyncKey(512);
+        KeyPair pair = CryptoHandler.generateAsyncKey(rsa_keysize);
         this.pub = pair.getPublic();
         this.priv = pair.getPrivate();
     }

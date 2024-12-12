@@ -19,7 +19,7 @@ public class NetworkManager {
         List<Network> networks = new ArrayList<>();
         try {
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
-            while(interfaces.hasMoreElements()) {
+            while (interfaces.hasMoreElements()) {
                 NetworkInterface networkInterface = interfaces.nextElement();
                 if (!networkInterface.isUp() || networkInterface.isLoopback()) {
                     continue;
@@ -43,11 +43,16 @@ public class NetworkManager {
     }
 
     public static void main(String[] args) {
-        for(Network network : new NetworkManager(2000).searchInterfaces()) {
-            System.out.println(network.getInterfacename()+" "+ network.getMask()+ " "+network.getNetworkadr());
-            for(Device dev : network.getDevices()) {
-                System.out.println("DEVICE: "+dev.getAverageResponseTime()+" "+dev.getHostName()+" "+dev.getIpv4Address()+ " ");
+        try {
+            NetworkManager man = new NetworkManager(1000);
+            List<Network> l = man.searchInterfaces();
+            for(Network net : l) {
+                for(Device device : net.searchDevices(1000)) {
+                    System.out.println(device.getIpv4Address());
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

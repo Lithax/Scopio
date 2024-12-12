@@ -27,6 +27,10 @@ class ClientHandler extends Thread {
        
     }
 
+    public boolean handshake() {
+        writeAndRead(Request.R)
+    }
+
     public boolean join(String ip, int port) throws Exception {
         socket = new Socket(ip, port);
         new Logger().writeNewLogEntry("Connected to Server "+ip+":"+port, LogLevel.INFO);

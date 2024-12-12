@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "FileHandler",
+            "request": "launch",
+            "mainClass": "scopio.file.FileHandler",
+            "projectName": "Scopio_38da41c0"
+        },
+        {
+            "type": "java",
             "name": "Transmittor",
             "request": "launch",
             "mainClass": "scopio.net.Transmittor",

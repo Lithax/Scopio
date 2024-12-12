@@ -19,8 +19,10 @@ public class Client extends Thread {
             try {
                 socket.getInputStream().read(buffer);
                 String str = new String(buffer);
-                System.out.println(str.trim());
-                Request.findRequest(str.trim()).executeAction(server, buffer, socket);
+                String sub = str.substring(0, str.length() >= 5 ? 5 : str.length());
+                System.out.println("RAW: "+str);
+                System.out.println("CUT: "+sub);
+                Request.findRequest(sub).executeAction(server, buffer, socket);
             } catch (Exception e) {
                 e.printStackTrace();
             }
