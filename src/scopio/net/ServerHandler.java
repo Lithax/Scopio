@@ -1,4 +1,5 @@
 package scopio.net;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -16,6 +17,7 @@ import scopio.security.CryptoHandler;
 class ServerHandler extends Thread {
     private ServerSocket serverSocket;
     private List<Socket> clientSockets = new ArrayList<>();
+    private List<Client> clients = new ArrayList<>();
     private byte[] buffer;
     private int port;
     private PublicKey pub;
@@ -35,7 +37,9 @@ class ServerHandler extends Thread {
             try {
                 Socket socket = serverSocket.accept();
                 synchronized(clientSockets) {
-                    new Client(socket, buffer, this).start();
+                    Client c = new Client(socket, buffer, this);
+                    c.start();
+                    clients.add(c);
                     clientSockets.add(socket);
                 }
             } catch (Exception e) {
@@ -126,5 +130,14 @@ class ServerHandler extends Thread {
 
     public PrivateKey getPrivateKey() {
         return priv;
+    }
+
+    public Client getClientFromSocket(Socket s) {
+        for(Client c : clients) {
+            if(c.getSocket().equals(s)) {
+                return c;
+            }
+        }
+        return null;
     }
 }

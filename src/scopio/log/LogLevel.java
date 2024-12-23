@@ -4,7 +4,9 @@ public enum LogLevel {
     INFO("info"),
     WARNING("warning"),
     ERROR("error"),
-    CRITICAL("critical");
+    CRITICAL("critical"),
+    SUCESS("sucess"),
+    FAILED("failed");
 
     private final String log;
 

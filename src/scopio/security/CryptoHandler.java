@@ -1,13 +1,16 @@
 package scopio.security;
 
+import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
+import java.security.spec.X509EncodedKeySpec;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 import scopio.log.LogLevel;
 import scopio.log.Logger;
@@ -60,9 +63,19 @@ public class CryptoHandler {
         return cipher.doFinal(encryptedData);
     }
 
-    public CryptoHandler(int AsyncKeysize) {
+    public static PublicKey byteToKey(byte[] data) throws Exception {
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(data);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        return keyFactory.generatePublic(keySpec);
+    }
+
+    public static SecretKey byteToSecretKey(byte[] data) throws Exception {
+        return new SecretKeySpec(data, "AES");
+    }
+
+    public CryptoHandler(int asyncKeysize) {
         try {
-            this.pair = generateAsyncKey(AsyncKeysize);
+            this.pair = generateAsyncKey(asyncKeysize);
         } catch (Exception e) {
             new Logger().writeNewLogEntry(e.getMessage(), LogLevel.ERROR);
         }

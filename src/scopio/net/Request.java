@@ -2,33 +2,36 @@ package scopio.net;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.nio.charset.Charset;
 
 import scopio.security.CryptoHandler;
+import scopio.security.HashingHandler;
+import scopio.util.ByteString;
 
 public enum Request {
     PING("!ping") {
         @Override
-        public void executeAction(ServerHandler server, byte[] data, Socket socket) {
-            try {
-                server.write("!a".getBytes(), socket);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        public byte[] executeAction(ServerHandler server, byte[] data, Socket socket) throws Exception {
+            return "a".getBytes(Charset.forName("ASCII"));
         }
     },
-    GET_PUBLIC_KEY("!kpub") {
+    GET_PUBLIC_KEY("!rsa_") {
         @Override
-        public void executeAction(ServerHandler server, byte[] data, Socket socket) {
-            try {
-                server.write(server.getPublicKey().getEncoded(), socket);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        public byte[] executeAction(ServerHandler server, byte[] data, Socket socket) throws Exception {
+            return server.getPublicKey().getEncoded();
+        }
+    },
+    EXCHANGE_AES("!aes_") {
+        @Override
+        public byte[] executeAction(ServerHandler server, byte[] data, Socket socket) throws Exception {
+            byte[] sub = new ByteString(data).subBytes(6, data.length);
+            server.getClientFromSocket(socket).setAES(CryptoHandler.byteToSecretKey(sub));
+            return "approved".getBytes(Charset.forName("ASCII"));
         }
     },
     FILE_TRANSMIT("!file") {
         @Override
-        public void executeAction(ServerHandler server, byte[] data, Socket socket) {
+        public byte[] executeAction(ServerHandler server, byte[] data, Socket socket) throws Exception {
             String full = new String(data);
             String filename = full.substring(5, full.length());
             
@@ -37,7 +40,7 @@ public enum Request {
 
     final String prefix;
 
-    public abstract void executeAction(ServerHandler server, byte[] data, Socket socket);
+    public abstract byte[] executeAction(ServerHandler server, byte[] data, Socket socket) throws Exception;
 
     Request(String prefix) {
         this.prefix = prefix;
