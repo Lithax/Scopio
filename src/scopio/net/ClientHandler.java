@@ -37,7 +37,7 @@ class ClientHandler extends Thread {
             this.aes = CryptoHandler.generateSyncKey(aes_keysize);
             PublicKey pub = CryptoHandler.byteToKey(pkey);
             byte[] enc_aes = CryptoHandler.encrypt(aes.getEncoded(), pub);
-            if(new String(writeAndRead(Request.makeRequest(Request.EXCHANGE_AES, enc_aes))).equals("approved")) {
+            if(new String(writeAndRead(Request.makeRequest(Request.EXCHANGE_AES, enc_aes)), "ASCII").equals("approved")) {
                 new Logger().writeNewLogEntry("Server "+getServerString()+" approved aes exchange", LogLevel.SUCESS);
                 return true;
             } else {

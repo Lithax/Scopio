@@ -1,8 +1,8 @@
 package scopio.net;
 
 import javax.crypto.SecretKey;
-
 import scopio.security.CryptoHandler;
+import scopio.util.CompressionHandler;
 
 import java.net.Socket;
 
@@ -23,20 +23,23 @@ public class Client extends Thread {
         while(true) {
             try {
                 socket.getInputStream().read(buffer);
+                System.out.println(new String(buffer));
+                buffer = CompressionHandler.decompress(buffer);
                 if(aes != null) {
                     String str = new String(buffer);
                     String sub = str.substring(0, str.length() >= 5 ? 5 : str.length());
                     System.out.println("RAW: "+str);
                     System.out.println("CUT: "+sub);
-                    server.write(Request.findRequest(sub).executeAction(server, buffer, socket), socket);
+                    buffer = CompressionHandler.compress(Request.findRequest(sub).executeAction(server, buffer, socket));
                 } else {
                     byte[] decrypted = CryptoHandler.decrypt(buffer, aes);
                     String str = new String(decrypted);
                     String sub = str.substring(0, str.length() >= 5 ? 5 : str.length());
                     System.out.println("RAW: "+str);
                     System.out.println("CUT: "+sub);
-                    server.write(CryptoHandler.encrypt(Request.findRequest(sub).executeAction(server, decrypted, socket), aes), socket);
+                    buffer = CryptoHandler.encrypt(Request.findRequest(sub).executeAction(server, decrypted, socket), aes);
                 }
+                server.write(CompressionHandler.compress(buffer), socket);
             } catch (Exception e) {
                 e.printStackTrace();
             }

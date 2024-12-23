@@ -5,7 +5,6 @@ import java.net.Socket;
 import java.nio.charset.Charset;
 
 import scopio.security.CryptoHandler;
-import scopio.security.HashingHandler;
 import scopio.util.ByteString;
 
 public enum Request {
@@ -34,7 +33,7 @@ public enum Request {
         public byte[] executeAction(ServerHandler server, byte[] data, Socket socket) throws Exception {
             String full = new String(data);
             String filename = full.substring(5, full.length());
-            
+            return null;
         }
     };
 

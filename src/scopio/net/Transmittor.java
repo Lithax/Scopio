@@ -2,6 +2,12 @@ package scopio.net;
 
 import scopio.log.*;
 
+/**
+ * Transmittor, handles Requests from GUI Classes
+ * @author Lithax
+ * @version 23-12-24
+ */
+
 class Transmittor {
     private byte[] buffer;
     public static final int SERVER = 1;
